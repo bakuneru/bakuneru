@@ -1,0 +1,76 @@
+<html>
+  <head>
+    <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
+    <script src="FCClientJS.js"></script>
+    <link rel="stylesheet" href="css/facedetect.css">
+  </head>
+  <body>
+    <div id="conent_demo_image" style="width: 480px;"></div>
+    <div>There are <span id="face_num">Undetected</span> faces in this photo.</div>
+    <script type="text/javascript">
+      $(function() {
+        function drawFaces(div, photo, drawPoints) {
+          console.log("drawFaces");
+          console.log(photo);
+          if (!photo) {
+            alert("No image found");
+            return;
+          }
+          if (photo.error_message) {
+            alert(photo.error_message);
+            return;
+          }
+          var imageWrapper = $('<div class="image_wrapper"></div>').appendTo(div);
+          var maxImgWidth = parseInt(div.prev().children(".img_max_width").html(), 10);
+          var maxImgHeight = parseInt(div.prev().children(".img_max_height").html(), 10);
+          var imgWidth = photo.width;
+          var imgHeight = photo.height;
+          var scaleFactor = Math.min(maxImgWidth / imgWidth, maxImgHeight / imgHeight);
+          if (scaleFactor < 1) {
+            imgWidth = Math.round(imgWidth * scaleFactor);
+            imgHeight = Math.round(imgHeight * scaleFactor);
+          }
+          imageWrapper.append($('<img alt="face detection results" width="' + imgWidth + 'px" height="' + imgHeight + 'px" src="' + photo.url + '" />'));
+          if (photo.tags) {
+            console.log("Number of faces: " + photo.tags.length);
+            for (var i = 0; i < photo.tags.length; ++i) {
+              var tag = photo.tags[i];
+              var tagWidth = tag.width * 1.5;
+              var tagHeight = tag.height * 1.5;
+              var width = Math.round(tagWidth * imgWidth / 100);
+              var height = Math.round(tagHeight * imgHeight / 100);
+              var left = Math.round((tag.center.x - 0.5 * tagWidth) * imgWidth / 100);
+              var top = Math.round((tag.center.y - 0.5 * tagHeight) * imgHeight / 100);
+              var tagStyle = 'top: ' + top + 'px; left: ' + left + 'px; width: ' + width + 'px; height: ' + height + 'px; transform: rotate(' +
+                tag.roll + 'deg); -ms-transform: rotate(' + tag.roll + 'deg); -moz-transform: rotate(' + tag.roll + 'deg); -webkit-transform: rotate(' +
+                tag.roll + 'deg); -o-transform: rotate(' + tag.roll + 'deg)';
+              var apiFaceTag = $('<div class="api_face" style="' + tagStyle + '"><div class="api_face_inner"><div class="api_face_inner_tid" name="' + tag.tid + '"></div></div></div>').appendTo(imageWrapper);
+            }
+          }
+        }
+
+        function tagNum(photo){
+          if (photo.tags) {
+            return photo.tags.length;
+          }
+          else {
+            console.log("Failed to detect photo object");
+          }
+        }
+
+        function writeTagNum(photo){
+          $('span#face_num').text(tagNum(photo));
+        }
+
+        function callback(data) {
+          drawFaces($("#conent_demo_image"), data.photos[0], true);
+          writeTagNum(data.photos[0]);
+        }
+
+        var client = new FCClientJS("ca7f568066a44d348991584314fec224", "1dd6c0839ab943eaa4e084189fed33d5");
+        var options = new Object();
+        client.facesDetect("https://skybiometry.com/Content/Samples/five.jpg", null, options, callback)
+      });
+    </script>
+  </body>
+</html>
