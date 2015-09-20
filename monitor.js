@@ -30,7 +30,7 @@ var fileupload = function() {
           url: url,
           type: 'POST',
           success: function(){
-            // ここで顔認識のメソッドを呼び出す
+              alert.('upload success');
           },
           data: data,
           dataType: 'json'
