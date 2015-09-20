@@ -37,10 +37,21 @@ var fileupload = function() {
 
     data.image = canvasData;
 
+<<<<<<< HEAD
     $.ajax({
       url: url,
       type: 'POST',
       success: function(){
+=======
+        $.ajax({
+          url: url,
+          type: 'POST',
+          data: data,
+          dataType: 'json'
+        });
+	}
+}
+>>>>>>> 30e66b51aa9a88952c248e9883a4267a8a98f668
 
       },
       data: data,
