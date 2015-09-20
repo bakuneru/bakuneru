@@ -13,11 +13,28 @@ var onFailSoHard = function(e) {
 	console.log('エラー!', e);
 };
 
-//カメラ画像キャプチャ
-var snapshot = function() {
+//カメラ画像アップロード
+var fileupload = function() {
 	if (localMediaStream) {
 		ctx.drawImage(video, 0, 0);
-		document.querySelector('img').src = canvas.toDataURL('image/webp');
+        var canvasData = canvas.toDataURL('image/webp');
+		document.querySelector('img').src = canvasData;
+
+        var url = 'http://bak.seldnext.com/upload.php';
+        var data = {};
+        canvasData = canvasData.replace(/^data:image\/png;base64,/, '');
+
+        data.image = canvasData;
+
+        $.ajax({
+          url: url,
+          type: 'POST',
+          success: function(){
+            // ここで顔認識のメソッドを呼び出す
+          },
+          data: data,
+          dataType: 'json'
+        });
 	}
 }
 
@@ -26,14 +43,11 @@ var setSleepNum = function(num) {
 	$("#sleeperNum span").text(num);
 }
 
-
-
 if (hasGetUserMedia()) {
 	console.log("カメラ OK");
 } else {
 	alert("未対応ブラウザです。");
 }
-
 
 window.URL = window.URL || window.webkitURL;
 navigator.getUserMedia  = navigator.getUserMedia || navigator.webkitGetUserMedia ||
@@ -48,7 +62,7 @@ var sleepCount = 0;
 
 $(function(){
     setInterval(function(){
-      snapshot();
+      fileupload();
     },1000);
 		setInterval(function(){
       setSleepNum(sleepCount++);
