@@ -41,12 +41,12 @@ var fileupload = function() {
       url: url,
       type: 'POST',
       success: function(){
-        detectFace();
-        writeTagNum(data.photos[0]);
+
       },
       data: data,
       dataType: 'json'
     });
+    console.log("File uploaded");
 	}
 }
 
@@ -60,11 +60,13 @@ navigator.getUserMedia({video: true}, function(stream) {
 }, onFailSoHard);
 
 $(function(){
+  // 画像のアップ
+  setInterval(function(){
+    fileupload();
+  },5000);
 
- //  setInterval(function(){
- //    fileupload();
- //  },10000);
-	// setInterval(function(){
- //    setSleepNum(sleepCount++);
- //  },10000);
+  // 顔の検知処理
+  // setInterval(function(){
+  //   detectFace();
+  // },10000);
 });
