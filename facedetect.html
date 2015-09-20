@@ -10,8 +10,6 @@
     <script type="text/javascript">
       $(function() {
         function drawFaces(div, photo, drawPoints) {
-          console.log("drawFaces");
-          console.log(photo);
           if (!photo) {
             alert("No image found");
             return;
@@ -32,7 +30,6 @@
           }
           imageWrapper.append($('<img alt="face detection results" width="' + imgWidth + 'px" height="' + imgHeight + 'px" src="' + photo.url + '" />'));
           if (photo.tags) {
-            console.log("Number of faces: " + photo.tags.length);
             for (var i = 0; i < photo.tags.length; ++i) {
               var tag = photo.tags[i];
               var tagWidth = tag.width * 1.5;
