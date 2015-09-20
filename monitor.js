@@ -63,8 +63,8 @@ var sleepCount = 0;
 $(function(){
     setInterval(function(){
       fileupload();
-    },1000);
+    },10000);
 		setInterval(function(){
       setSleepNum(sleepCount++);
-    },1000);
+    },10000);
 });
