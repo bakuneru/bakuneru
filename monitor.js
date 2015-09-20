@@ -37,12 +37,6 @@ var fileupload = function() {
 
     data.image = canvasData;
 
-<<<<<<< HEAD
-    $.ajax({
-      url: url,
-      type: 'POST',
-      success: function(){
-=======
         $.ajax({
           url: url,
           type: 'POST',
@@ -50,15 +44,7 @@ var fileupload = function() {
           dataType: 'json'
         });
 	}
-}
->>>>>>> 30e66b51aa9a88952c248e9883a4267a8a98f668
-
-      },
-      data: data,
-      dataType: 'json'
-    });
-    console.log("File uploaded");
-	}
+        console.log("File uploaded");
 }
 
 window.URL = window.URL || window.webkitURL;
@@ -74,7 +60,7 @@ $(function(){
   // 画像のアップ
   setInterval(function(){
     fileupload();
-  },5000);
+  },30000);
 
   // 顔の検知処理
   // setInterval(function(){

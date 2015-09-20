@@ -5,6 +5,7 @@ var initNum = $("#allNum span").text();
 function tagNum(photo){
   console.log(photo.tags);
   if (photo.tags) {
+    console.log("Number of faces: " + photo.tags.length);
     return photo.tags.length;
   }
   else {
@@ -22,6 +23,7 @@ function writeTagNum(photo){
     // 寝ている人数を算出
     var currNum = tagNum(photo);
     var sleepNum = parseInt(initNum) - parseInt(currNum);
+    console.log(sleepNum);
     $('span#current_num').text(sleepNum);
   }
 }
