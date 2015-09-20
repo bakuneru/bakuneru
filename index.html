@@ -5,18 +5,28 @@
   <title>Top画面</title>
   <style>
     body { text-align: center;}
+    #content { position: relative; }
+    #startBtn {
+      position: absolute;
+      top: 400px;
+      left: 700px;
+     }
   </style>
   <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
 </head>
 <body>
-  <div>
-    <img src="./img/top.jpg" alt="サンプル" width="1024" height="400">
+  <div id="contents">
+
+    <div>
+      <img src="img/topScreen.gif" alt="サンプル">
+    </div>
+    <input type="image" src="img/startBtn.gif" id="startBtn" value="START!"></button>
+
   </div>
-  <button id="startBtn" class="btn btn-primary btn-large ">START!</button>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
   <script>
     $("#startBtn").click( function() {
-      alert("ここで、画面遷移します");
+      window.location.href = 'monitor.html';
     });
   </script>
 </body>
