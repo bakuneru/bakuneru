@@ -21,6 +21,13 @@ var snapshot = function() {
 	}
 }
 
+//眠っている人数の設定
+var setSleepNum = function(num) {
+	$("#sleeperNum span").text(num);
+}
+
+
+
 if (hasGetUserMedia()) {
 	console.log("カメラ OK");
 } else {
@@ -37,9 +44,13 @@ navigator.getUserMedia({video: true}, function(stream) {
   localMediaStream = stream;
 }, onFailSoHard);
 
+var sleepCount = 0;
+
 $(function(){
     setInterval(function(){
       snapshot();
     },1000);
+		setInterval(function(){
+      setSleepNum(sleepCount++);
+    },1000);
 });
-

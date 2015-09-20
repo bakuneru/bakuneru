@@ -1,7 +1,31 @@
-<body> 
-	<video autoplay width="640" height="480"></video>
-	<img src="" width="640" height="480" >
-	<canvas style="display:none;" width="640" height="480"></canvas>
+<!doctype html>
+<html lang="ja">
+<head>
+	<meta charset="utf-8">
+	<title>モニタ画面</title>
+	<style>
+	  body { text-align: center;}
+		/* #infoArea { text-align: left;} */
+		video {
+			border: 2px solid blue;
+		}
+	</style>
+</head>
+<body>
+	<div id="mediaArea">
+		<video autoplay width="640" height="480"></video>
+		<img src="" width="640" height="480" style="display: none;">
+		<canvas style="display:none;" width='640' height='480'></canvas>
+	</div>
+	<div id="infoArea">
+		<div id="allNum">
+			<label>受講数: <span>2</span>名</label>
+		</div>
+		<div id="sleeperNum">
+			<label>現在眠っている人数: <span>0</span>名</label>
+		</div>
+	</div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<script src="monitor.js"></script>
 </body>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-<script src="monitor.js"></script>
+</html>
