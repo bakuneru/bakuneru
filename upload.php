@@ -1,7 +1,12 @@
 <?php
-filter_input(INPUT_POST, $realtime_image);
+$imageData = filter_input(INPUT_POST, 'image');
 
 print_r($realtime_image);
 
-$data = file_get_contents($realtime_image);
-file_put_contents('img/photo.jpg',$data);
+$filename = '/var/www/html/bak.seldnext.com/img/photo.png';
+$fp = fopen($filename, 'w');
+
+fwrite($fp,base64_decode($imageData));
+fclose($fp);
+
+
