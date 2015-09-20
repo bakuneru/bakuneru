@@ -29,9 +29,6 @@ var fileupload = function() {
         $.ajax({
           url: url,
           type: 'POST',
-          success: function(){
-              alert.('upload success');
-          },
           data: data,
           dataType: 'json'
         });
